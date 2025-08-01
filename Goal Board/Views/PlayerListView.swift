@@ -30,10 +30,12 @@ struct PlayerListView: View {
             }
             List {
                 ForEach(players) { player in
-                    HStack {
-                        Text(player.name)
-                        Spacer()
-                        Text("Goals: \(player.goalCount)")
+                    NavigationLink (value: player) {
+                        HStack {
+                            Text(player.name)
+                            Spacer()
+                            Text("Goals: \(player.goalCount)")
+                        }
                     }
                 }
                 .onDelete { indexes in
@@ -42,16 +44,19 @@ struct PlayerListView: View {
                     }
                 }
             }
-        }
-        .navigationTitle("Players")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    isAddingPlayer.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                }
+            .navigationTitle("Players")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isAddingPlayer.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
 
+                }
+            }
+            .navigationDestination(for: Player.self) { player in
+                Text(player.name)
             }
         }
     }
@@ -69,6 +74,6 @@ struct PlayerListView: View {
 #Preview {
     NavigationStack {
             PlayerListView()
-        }
-        .modelContainer(for: Player.self, inMemory: true)
+    }
+    .modelContainer(for: Player.self, inMemory: true)
 }
