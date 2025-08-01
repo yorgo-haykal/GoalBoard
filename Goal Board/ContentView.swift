@@ -6,16 +6,25 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    
+    @State private var selectedTab = 0
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView(selection: $selectedTab) {
+            Tab("Players", systemImage: "figure.indoor.soccer", value: 1) {
+                NavigationStack {
+                    PlayerListView()
+                }
+            }
+            
+            Tab("Teams", systemImage:"person.3.fill", value: 2){
+                Text("Teams")
+            }
         }
-        .padding()
     }
 }
 
