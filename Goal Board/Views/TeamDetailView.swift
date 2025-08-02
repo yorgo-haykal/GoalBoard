@@ -14,7 +14,7 @@ struct TeamDetailView: View {
         VStack (alignment: .leading) {
             Text("Matches played: 0")
             
-            Text("Record: \(team.record.wins)-\(team.record.draws)-\(team.record.losses)")
+            Text("Record: \(team.wins)-\(team.draws)-\(team.losses)")
                 .navigationTitle(team.name)
             Divider()
             Text("Match History:")

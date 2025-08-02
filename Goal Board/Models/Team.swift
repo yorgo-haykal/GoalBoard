@@ -10,35 +10,22 @@ import SwiftData
 
 @Model
 class Team: Identifiable {
-    var id: String
+    var id: UUID = UUID()
     var name: String
     
     @Relationship
-    var players: [Player]
-    var record: Record
+    var players: [Player] = []
+    
+    var wins: Int = 0
+    var draws: Int = 0
+    var losses: Int = 0
     
     init(name: String) {
-        self.id = UUID().uuidString
         self.name = name
-        self.players = []
-        self.record = Record()
     }
     
     func addPlayer(_ player: Player) {
         players.append(player)
-    }
-}
-
-@Model
-class Record {
-    var wins: Int
-    var draws: Int
-    var losses: Int
-    
-    init() {
-        self.wins = 0
-        self.draws = 0
-        self.losses = 0
     }
     
     func incrementWins() { wins += 1 }

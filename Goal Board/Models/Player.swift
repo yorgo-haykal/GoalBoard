@@ -10,12 +10,11 @@ import SwiftData
 
 @Model
 class Player: Identifiable {
-    var id: String
+    var id: UUID = UUID()
     var name: String
     var goalCount: Int = 0
     
     init(name: String) {
-        self.id = UUID().uuidString
         self.name = name
     }
 }
