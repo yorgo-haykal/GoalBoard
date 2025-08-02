@@ -56,7 +56,7 @@ struct PlayerListView: View {
                 }
             }
             .navigationDestination(for: Player.self) { player in
-                Text(player.name)
+                PlayerDetailView(player: player)
             }
         }
     }

@@ -30,4 +30,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .modelContainer(for: Player.self)
 }
