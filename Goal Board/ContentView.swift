@@ -22,7 +22,9 @@ struct ContentView: View {
             }
             
             Tab("Teams", systemImage:"person.3.fill", value: 2){
-                Text("Teams")
+                NavigationStack {
+                    TeamListView()
+                }
             }
         }
     }
@@ -30,5 +32,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Player.self)
+        .modelContainer(for: [Player.self, Team.self], inMemory: true)
 }

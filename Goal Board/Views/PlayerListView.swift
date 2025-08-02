@@ -16,7 +16,7 @@ struct PlayerListView: View {
     @State var newPlayerName: String = ""
     
     var body: some View {
-        NavigationStack {
+        
             if isAddingPlayer {
                 HStack {
                     TextField("Enter player name", text: $newPlayerName)
@@ -58,7 +58,7 @@ struct PlayerListView: View {
             .navigationDestination(for: Player.self) { player in
                 PlayerDetailView(player: player)
             }
-        }
+        
     }
     
     func addPlayer(_ name: String) {

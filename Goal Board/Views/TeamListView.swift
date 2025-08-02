@@ -14,7 +14,6 @@ struct TeamListView: View {
     @State private var teamCount: Int = 0
     
     var body: some View {
-        NavigationStack {
             List{
                 ForEach(teams) { team in
                     NavigationLink(value: team){
@@ -40,9 +39,8 @@ struct TeamListView: View {
                 }
             }
             .navigationDestination(for: Team.self) { team in
-                Text(team.name)
+                TeamDetailView(team: team)
             }
-        }
     }
     
     func addTeam() {
