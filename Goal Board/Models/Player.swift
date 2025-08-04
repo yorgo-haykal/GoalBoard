@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Player: Identifiable {
+class Player: Identifiable, Equatable {
     var id: UUID = UUID()
     var name: String
     var goalCount: Int = 0
