@@ -9,10 +9,27 @@ import SwiftUI
 import SwiftData
 
 struct PlayerDetailView: View {
-    var player: Player
+    @Environment(\.modelContext) private var modelContext
+    @Bindable var player: Player
+    
+    @State private var isEditing = false
+    @State private var newPlayerName: String = ""
     
     var body: some View {
         VStack (alignment: .leading){
+            if isEditing {
+                HStack {
+                    TextField("New Name", text: $newPlayerName)
+                        .textFieldStyle(.roundedBorder)
+                    Button("Confirm") {
+                        player.name = newPlayerName
+                        try? modelContext.save()
+                        isEditing.toggle()
+                    }
+                }
+                Divider()
+            }
+            
             Text("Goals: \(player.goalCount)")
             Divider()
             Text("Teams: ")
@@ -28,10 +45,22 @@ struct PlayerDetailView: View {
             Spacer()
         }
         .padding()
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(isEditing ? "Cancel" : "Edit") {
+                    if isEditing{
+                        newPlayerName = ""
+                    }
+                    isEditing.toggle()
+                }
+            }
+        })
         .navigationTitle(player.name)
     }
 }
 
 #Preview {
-    PlayerDetailView(player: Player(name: "Yorgo"))
+    NavigationStack {
+        PlayerDetailView(player: Player(name: "Yorgo"))
+    }
 }
