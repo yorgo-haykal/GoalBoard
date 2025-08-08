@@ -14,6 +14,9 @@ class Player: Identifiable, Equatable {
     var name: String
     var goalCount: Int = 0
     
+    @Relationship
+    var teams: [Team] = []
+    
     init(name: String) {
         self.name = name
     }

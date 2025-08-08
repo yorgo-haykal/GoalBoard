@@ -14,6 +14,6 @@ struct Goal_BoardApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Player.self)
+        .modelContainer(for: [Player.self, Team.self, Match.self])
     }
 }

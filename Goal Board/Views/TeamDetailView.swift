@@ -22,6 +22,7 @@ struct TeamDetailView: View {
             if showAddPlayerSheet {
                 HStack {
                     Picker("Select player", selection: $playerToAdd) {
+                        Text("Select a player").tag(Optional<Player>(nil))
                         ForEach(players) { player in
                             Text(player.name).tag(Optional(player))
                         }
@@ -31,6 +32,7 @@ struct TeamDetailView: View {
                     Button("Add") {
                         if let player = playerToAdd{
                             team.addPlayer(player)
+                            player.teams.append(team)
                             playerToAdd = nil
                             showAddPlayerSheet.toggle()
                             try? modelContext.save()
@@ -41,9 +43,11 @@ struct TeamDetailView: View {
             }
                 
             Text("Players:")
-            HStack {
+            List {
                 ForEach(team.players) { player in
-                    Text(player.name)
+                    NavigationLink(player.name) {
+                        PlayerDetailView(player: player)
+                    }
                 }
             }
             

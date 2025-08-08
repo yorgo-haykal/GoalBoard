@@ -15,12 +15,20 @@ struct PlayerDetailView: View {
         VStack (alignment: .leading){
             Text("Goals: \(player.goalCount)")
             Divider()
+            Text("Teams: ")
+            List{
+                ForEach(player.teams){ team in
+                    NavigationLink(value: team) {
+                        Text(team.name)
+                    }
+                }
+            }
+            Divider()
             Text("Match History:")
             Spacer()
         }
         .padding()
         .navigationTitle(player.name)
-        
     }
 }
 

@@ -13,7 +13,7 @@ class Team: Identifiable {
     var id: UUID = UUID()
     var name: String
     
-    @Relationship
+    @Relationship(inverse: \Player.teams)
     var players: [Player] = []
     
     var wins: Int = 0

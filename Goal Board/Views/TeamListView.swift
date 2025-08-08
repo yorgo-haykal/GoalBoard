@@ -38,9 +38,6 @@ struct TeamListView: View {
 
                 }
             }
-            .navigationDestination(for: Team.self) { team in
-                TeamDetailView(team: team)
-            }
     }
     
     func addTeam() {

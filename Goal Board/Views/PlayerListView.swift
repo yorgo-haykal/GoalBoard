@@ -55,19 +55,17 @@ struct PlayerListView: View {
 
                 }
             }
-            .navigationDestination(for: Player.self) { player in
-                PlayerDetailView(player: player)
-            }
-        
     }
     
     func addPlayer(_ name: String) {
         let player = Player(name: name)
         modelContext.insert(player)
+        try? modelContext.save()
     }
     
     func deletePlayer(_ player: Player) {
         modelContext.delete(player)
+        try? modelContext.save()
     }
 }
 
