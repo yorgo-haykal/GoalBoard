@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Player: Identifiable, Equatable {
+class Player: Identifiable, Hashable {
     var id: UUID = UUID()
     var name: String
     var goalCount: Int = 0
@@ -19,5 +19,13 @@ class Player: Identifiable, Equatable {
     
     init(name: String) {
         self.name = name
+    }
+    
+    static func == (lhs: Player, rhs: Player) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

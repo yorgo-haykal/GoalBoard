@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Match: Identifiable {
+class Match: Identifiable, Hashable {
     var id: UUID = UUID()
     var date: Date
     
@@ -28,6 +28,14 @@ class Match: Identifiable {
         self.date = date
         self.team1 = team1
         self.team2 = team2
+    }
+    
+    static func == (lhs: Match, rhs: Match) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     func logGoal(_ goal: Goal){

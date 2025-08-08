@@ -13,9 +13,13 @@ struct TeamListView: View {
     @Query private var teams: [Team]
     @State private var teamCount: Int = 0
     
+    var sortedTeams: [Team] {
+        teams.sorted() { $0.name < $1.name }
+    }
+    
     var body: some View {
             List{
-                ForEach(teams) { team in
+                ForEach(sortedTeams) { team in
                     NavigationLink(value: team){
                         Text(team.name)
                     }
@@ -55,6 +59,9 @@ struct TeamListView: View {
 #Preview {
     NavigationStack {
         TeamListView()
+            .navigationDestination(for: Team.self, destination: { team in
+                TeamDetailView(team: team)
+            })
     }
     .modelContainer(for: Team.self, inMemory: true)
 }

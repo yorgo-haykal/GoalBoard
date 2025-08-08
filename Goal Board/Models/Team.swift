@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Team: Identifiable {
+class Team: Identifiable, Hashable {
     var id: UUID = UUID()
     var name: String
     
@@ -22,6 +22,14 @@ class Team: Identifiable {
     
     init(name: String) {
         self.name = name
+    }
+    
+    static func == (lhs: Team, rhs: Team) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     func addPlayer(_ player: Player) {
