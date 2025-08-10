@@ -15,10 +15,25 @@ struct TeamDetailView: View {
     @State private var showAddPlayerSheet: Bool = false
     @State private var playerToAdd: Player?
     
+    @State private var isEditing: Bool = false
+    @State private var newTeamName: String = ""
+    
     @Bindable var team: Team
     
     var body: some View {
         VStack (alignment: .leading) {
+            if isEditing {
+                HStack {
+                    TextField("New Name", text: $newTeamName)
+                        .textFieldStyle(.roundedBorder)
+                    Button("Confirm") {
+                        team.name = newTeamName
+                        try? modelContext.save()
+                        isEditing.toggle()
+                    }
+                }
+                Divider()
+            }
             if showAddPlayerSheet {
                 HStack {
                     Picker("Select player", selection: $playerToAdd) {
@@ -49,6 +64,12 @@ struct TeamDetailView: View {
                         PlayerDetailView(player: player)
                     }
                 }
+                .onDelete { indexes in
+                    for index in indexes {
+                        team.removePlayer(team.players[index])
+                        try? modelContext.save()
+                    }
+                }
             }
             
             Text("Matches played: 0")
@@ -63,6 +84,16 @@ struct TeamDetailView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Add Player") {
                     showAddPlayerSheet.toggle()
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(isEditing ? "Cancel" : "Edit") {
+                    if isEditing {
+                        newTeamName = ""
+                    } else {
+                        newTeamName = team.name
+                    }
+                    isEditing.toggle()
                 }
             }
         })

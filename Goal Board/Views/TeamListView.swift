@@ -11,7 +11,6 @@ import SwiftData
 struct TeamListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var teams: [Team]
-    @State private var teamCount: Int = 0
     
     var sortedTeams: [Team] {
         teams.sorted() { $0.name < $1.name }
@@ -27,7 +26,7 @@ struct TeamListView: View {
                 }
                 .onDelete { indexes in
                     for index in indexes {
-                        deleteTeam(teams[index])
+                        deleteTeam(sortedTeams[index])
                     }
                 }
             }
@@ -45,13 +44,11 @@ struct TeamListView: View {
     }
     
     func addTeam() {
-        teamCount += 1
-        let team = Team(name: "Team \(teamCount)")
+        let team = Team(name: "New Team")
         modelContext.insert(team)
     }
     
     func deleteTeam(_ team: Team) {
-        teamCount -= 1
         modelContext.delete(team)
     }
 }

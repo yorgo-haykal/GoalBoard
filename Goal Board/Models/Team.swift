@@ -33,7 +33,12 @@ class Team: Identifiable, Hashable {
     }
     
     func addPlayer(_ player: Player) {
+        guard !players.contains(where: { $0.id == player.id }) else { return }
         players.append(player)
+    }
+    
+    func removePlayer(_ player: Player) {
+        players.removeAll { $0 == player }
     }
     
     func incrementWins() { wins += 1 }
