@@ -24,7 +24,7 @@ class Match: Identifiable, Hashable {
     @Relationship
     var goals: [Goal] = []
     
-    init(date: Date, team1: Team, team2: Team){
+    init(date: Date = Date(), team1: Team, team2: Team){
         self.date = date
         self.team1 = team1
         self.team2 = team2
