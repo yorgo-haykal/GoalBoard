@@ -16,6 +16,10 @@ class Team: Identifiable, Hashable {
     @Relationship(inverse: \Player.teams)
     var players: [Player] = []
     
+    @Relationship(inverse: \Match.team1) var matchesAsTeam1: [Match] = []
+    @Relationship(inverse: \Match.team2) var matchesAsTeam2: [Match] = []
+    var matches: [Match] { matchesAsTeam1 + matchesAsTeam2 }
+    
     var wins: Int = 0
     var draws: Int = 0
     var losses: Int = 0

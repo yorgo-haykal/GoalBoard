@@ -72,12 +72,17 @@ struct TeamDetailView: View {
                 }
             }
             
-            Text("Matches played: 0")
+            Text("Matches played: \(team.matches.count)")
             
             Text("Record: \(team.wins)-\(team.draws)-\(team.losses)")
                 .navigationTitle(team.name)
             Divider()
             Text("Match History:")
+            List {
+                ForEach(team.matches) { match in
+                    Text("\(match.team1.name)   \(match.team1Score) - \(match.team2Score) \(match.team2.name)")
+                }
+            }.listStyle(.inset)
             Spacer()
         }
         .toolbar(content: {
