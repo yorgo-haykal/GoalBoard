@@ -20,6 +20,7 @@ struct PlayerListView: View {
             if isAddingPlayer {
                 HStack {
                     TextField("Enter player name", text: $newPlayerName)
+                        .autocorrectionDisabled(true)
                     Button("Add Player") {
                         addPlayer(newPlayerName)
                         newPlayerName = ""
