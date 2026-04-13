@@ -23,9 +23,12 @@ class Team: Identifiable, Hashable {
     var wins: Int = 0
     var draws: Int = 0
     var losses: Int = 0
-    
-    init(name: String) {
+
+    var isTemporary: Bool = false
+
+    init(name: String, isTemporary: Bool = false) {
         self.name = name
+        self.isTemporary = isTemporary
     }
     
     static func == (lhs: Team, rhs: Team) -> Bool {

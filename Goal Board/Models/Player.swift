@@ -28,4 +28,12 @@ class Player: Identifiable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+    
+    func incrementGoalCount() {
+        goalCount += 1
+    }
+    
+    func decrementGoalCount() {
+        goalCount = max(0, goalCount - 1)
+    }
 }

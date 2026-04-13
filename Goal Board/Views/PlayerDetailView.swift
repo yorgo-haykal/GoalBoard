@@ -50,6 +50,8 @@ struct PlayerDetailView: View {
                 Button(isEditing ? "Cancel" : "Edit") {
                     if isEditing{
                         newPlayerName = ""
+                    } else {
+                        newPlayerName = player.name
                     }
                     isEditing.toggle()
                 }

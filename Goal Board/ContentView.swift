@@ -42,6 +42,9 @@ struct ContentView: View {
             Tab("Matches", systemImage: "soccerball", value: 3){
                 NavigationStack {
                     MatchListView()
+                        .navigationDestination(for: Match.self) { match in
+                            MatchDetailView(match: match)
+                        }
                 }
             }
         }

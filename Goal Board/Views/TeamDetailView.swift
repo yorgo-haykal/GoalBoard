@@ -80,7 +80,7 @@ struct TeamDetailView: View {
             Text("Match History:")
             List {
                 ForEach(team.matches) { match in
-                    Text("\(match.team1.name)   \(match.team1Score) - \(match.team2Score) \(match.team2.name)")
+                    Text("\(match.team1?.name ?? "Team 2")   \(match.team1Score) - \(match.team2Score) \(match.team2?.name ?? "Team 2")")
                 }
             }.listStyle(.inset)
             Spacer()

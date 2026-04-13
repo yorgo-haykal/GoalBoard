@@ -10,7 +10,7 @@ import SwiftData
 
 struct TeamListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var teams: [Team]
+    @Query(filter: #Predicate<Team> { $0.isTemporary == false }) private var teams: [Team]
     
     var sortedTeams: [Team] {
         teams.sorted() { $0.name < $1.name }

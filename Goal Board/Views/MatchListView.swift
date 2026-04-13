@@ -17,9 +17,11 @@ struct MatchListView: View {
     var body: some View {
         List {
             ForEach(matches) { match in
-                HStack {
-                    Text("\(match.team1.name) vs \(match.team2.name)")
-                    Text(match.date, style: .date)
+                NavigationLink(value: match) {
+                    HStack {
+                        Text("\(match.team1?.name ?? "Team 1") vs \(match.team2?.name ?? "Team 2")")
+                        Text(match.date, style: .date)
+                    }
                 }
             }
         }
@@ -42,7 +44,7 @@ struct MatchListView: View {
 struct AddMatchSheetView: View {
     @Binding var isPresented: Bool
     @Environment(\.modelContext) private var modelContext
-    @Query private var teams: [Team]
+    @Query(filter: #Predicate<Team> { $0.isTemporary == false }) private var teams: [Team]
     
     @State private var selectedTeam1: Team?
     @State private var selectedTeam2: Team?
