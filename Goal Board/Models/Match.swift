@@ -40,12 +40,22 @@ class Match: Identifiable, Hashable {
     
     var status: MatchStatus
     
+    var startedAt: Date?
+    var endedAt: Date?
+    
+    var elapsedSeconds: Int {
+            guard let startedAt = startedAt else { return 0 }
+            let end = endedAt ?? Date()
+            return max(0, Int(end.timeIntervalSince(startedAt)))
+        }
+    
     // To be used when starting a quick match
     init() {
         self.date = Date()
         self.team1 = Team(name: "Team 1", isTemporary: true)
         self.team2 = Team(name: "Team 2", isTemporary: true)
         self.status = .InProgress
+        self.startedAt = Date()
     }
     
     // To be used when scheduling a match
@@ -68,10 +78,6 @@ class Match: Identifiable, Hashable {
         guard status == .InProgress else {
             throw MatchError.matchNotInProgress
         }
-        
-        if goal.goalType != .OwnGoal {
-            goal.player?.incrementGoalCount()
-        }
         goals.append(goal)
     }
     
@@ -80,9 +86,6 @@ class Match: Identifiable, Hashable {
             throw MatchError.matchNotInProgress
         }
     
-        if goal.goalType != .OwnGoal {
-            goal.player?.decrementGoalCount()
-        }
         goals.removeAll(where: { $0.id == goal.id })
     }
     
@@ -90,6 +93,7 @@ class Match: Identifiable, Hashable {
         guard status == .Scheduled || status == .InProgress else {
             throw MatchError.matchFinished
         }
+        self.startedAt = Date()
         status = MatchStatus.InProgress
     }
     
@@ -111,6 +115,7 @@ class Match: Identifiable, Hashable {
             }
         }
         
+        self.endedAt = Date()
         status = MatchStatus.Finished
     }
     
@@ -143,23 +148,21 @@ class Goal: Identifiable {
     @Relationship
     var player: Player?
     
-    var timestamp: Date
+    var elapsedSeconds: Int
     
     @Attribute
     var goalType: GoalType
     
-    init(match: Match, team: Team? = nil , player: Player? = nil, timestamp: Date,goalType: GoalType){
+    init(match: Match, team: Team? = nil , player: Player? = nil, elapsedSeconds: Int, goalType: GoalType){
         self.match = match
         self.team = team
         self.player = player
-        self.timestamp = timestamp
         self.goalType = goalType
+        self.elapsedSeconds = elapsedSeconds
     }
     
     enum GoalType : String, Codable, Sendable{
         case Regular
         case Penalty
-        case OwnGoal
-        case FreeKick
     }
 }

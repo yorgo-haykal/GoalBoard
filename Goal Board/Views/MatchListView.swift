@@ -13,19 +13,35 @@ struct MatchListView: View {
     @Query private var matches: [Match]
     
     @State private var isAddingMatch: Bool = false
-    
+    @State private var quickMatch: Match?
+
     var body: some View {
         List {
             ForEach(matches) { match in
                 NavigationLink(value: match) {
                     HStack {
                         Text("\(match.team1?.name ?? "Team 1") vs \(match.team2?.name ?? "Team 2")")
+                        Spacer()
+                        Text(match.status == .InProgress ? "Live" : "")
+                            .font(.caption)
+                            .foregroundStyle(.red)
                         Text(match.date, style: .date)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
         }
+        .navigationDestination(item: $quickMatch) { match in
+            MatchDetailView(match: match)
+        }
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Quick Match") {
+                    let match = Match()
+                    modelContext.insert(match)
+                    quickMatch = match
+                }
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     isAddingMatch.toggle()
