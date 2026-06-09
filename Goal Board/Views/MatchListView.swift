@@ -10,7 +10,7 @@ import SwiftData
 
 struct MatchListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var matches: [Match]
+    @Query(sort: \Match.date, order: .reverse) private var matches: [Match]
     
     @State private var isAddingMatch: Bool = false
     @State private var showingConfirmQuickMatch: Bool = false
