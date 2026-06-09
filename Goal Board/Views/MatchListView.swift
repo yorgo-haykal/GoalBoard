@@ -13,6 +13,7 @@ struct MatchListView: View {
     @Query private var matches: [Match]
     
     @State private var isAddingMatch: Bool = false
+    @State private var showingConfirmQuickMatch: Bool = false
     @State private var quickMatch: Match?
 
     var body: some View {
@@ -20,7 +21,16 @@ struct MatchListView: View {
             ForEach(matches) { match in
                 NavigationLink(value: match) {
                     HStack {
-                        Text("\(match.team1?.name ?? "Team 1") vs \(match.team2?.name ?? "Team 2")")
+                        if (match.status != .Scheduled){
+                            Text(match.team1?.name ?? "Team 1")
+                                        .bold(match.result == .Team1)
+                                    Text("\(match.team1Score) - \(match.team2Score)")
+                                    Text(match.team2?.name ?? "Team 2")
+                                        .bold(match.result == .Team2)
+                        } else {
+                            Text("\(match.team1?.name ?? "Team 1") vs \(match.team2?.name ?? "Team 2")")
+                        }
+                    
                         Spacer()
                         Text(match.status == .InProgress ? "Live" : "")
                             .font(.caption)
@@ -30,6 +40,16 @@ struct MatchListView: View {
                     }
                 }
             }
+            .onDelete { indexes in
+                for index in indexes {
+                    let match = matches[index]
+                    // Clean up temporary teams from quick matches
+                    if let t1 = match.team1, t1.isTemporary { modelContext.delete(t1) }
+                    if let t2 = match.team2, t2.isTemporary { modelContext.delete(t2) }
+                    modelContext.delete(match)
+                }
+            }
+            
         }
         .navigationDestination(item: $quickMatch) { match in
             MatchDetailView(match: match)
@@ -37,9 +57,15 @@ struct MatchListView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Quick Match") {
-                    let match = Match()
-                    modelContext.insert(match)
-                    quickMatch = match
+                    showingConfirmQuickMatch = true
+                }
+                .alert("Start Quick Match?", isPresented: $showingConfirmQuickMatch) {
+                    Button("Cancel", role: .cancel) {}
+                    Button("Start") {
+                        let match = Match()
+                        modelContext.insert(match)
+                        quickMatch = match
+                    }
                 }
             }
             ToolbarItem(placement: .topBarTrailing) {
