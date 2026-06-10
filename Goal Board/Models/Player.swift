@@ -12,10 +12,13 @@ import SwiftData
 class Player: Identifiable, Hashable {
     var id: UUID = UUID()
     var name: String
-    var goalCount: Int = 0
     
     @Relationship
     var teams: [Team] = []
+    
+    @Relationship(inverse: \Goal.player)
+    var goals: [Goal] = []
+    var goalCount: Int { goals.count }
     
     init(name: String) {
         self.name = name
@@ -27,13 +30,5 @@ class Player: Identifiable, Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-    }
-    
-    func incrementGoalCount() {
-        goalCount += 1
-    }
-    
-    func decrementGoalCount() {
-        goalCount = max(0, goalCount - 1)
     }
 }

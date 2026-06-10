@@ -80,6 +80,7 @@ struct MatchDetailView: View {
 
                 Button("End Match") {
                     try? match.endMatch()
+                    try? modelContext.save()
                 }
                 .buttonStyle(.bordered)
                 .foregroundStyle(.red)
@@ -207,6 +208,7 @@ struct LogGoalSheetView: View {
                             goalType: selectedGoalType
                         )
                         try? match.logGoal(goal)
+                        try? modelContext.save()
                         dismiss()
                     }
                 }

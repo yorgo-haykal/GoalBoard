@@ -20,9 +20,17 @@ class Team: Identifiable, Hashable {
     @Relationship(inverse: \Match.team2) var matchesAsTeam2: [Match] = []
     var matches: [Match] { matchesAsTeam1 + matchesAsTeam2 }
     
-    var wins: Int = 0
-    var draws: Int = 0
-    var losses: Int = 0
+    var wins: Int {
+        matchesAsTeam1.filter { $0.status == .Finished && $0.result == .Team1 }.count
+        + matchesAsTeam2.filter { $0.status == .Finished && $0.result == .Team2 }.count
+    }
+    var draws: Int {
+        matches.filter { $0.status == .Finished && $0.result == .Draw }.count
+    }
+    var losses: Int {
+        matchesAsTeam1.filter { $0.status == .Finished && $0.result == .Team2 }.count
+        + matchesAsTeam2.filter { $0.status == .Finished && $0.result == .Team1 }.count
+    }
 
     var isTemporary: Bool = false
 
@@ -47,8 +55,4 @@ class Team: Identifiable, Hashable {
     func removePlayer(_ player: Player) {
         players.removeAll { $0 == player }
     }
-    
-    func incrementWins() { wins += 1 }
-    func incrementDraws() { draws += 1 }
-    func incrementLosses() { losses += 1 }
 }

@@ -25,7 +25,7 @@ class Match: Identifiable, Hashable {
         goals.filter { $0.team == team2 }.count
     }
     
-    @Relationship
+    @Relationship(deleteRule: .cascade)
     var goals: [Goal] = []
     
     var result: MatchResult {
@@ -85,7 +85,6 @@ class Match: Identifiable, Hashable {
         guard status == .InProgress else {
             throw MatchError.matchNotInProgress
         }
-    
         goals.removeAll(where: { $0.id == goal.id })
     }
     
@@ -101,20 +100,6 @@ class Match: Identifiable, Hashable {
         guard status == .InProgress else {
             throw MatchError.matchNotInProgress
         }
-        
-        if let team1 = self.team1, let team2 = self.team2 {
-            if result == .Draw {
-                team1.incrementDraws()
-                team2.incrementDraws()
-            } else if result == .Team1 {
-                team1.incrementWins()
-                team2.incrementLosses()
-            } else {
-                team1.incrementLosses()
-                team2.incrementWins()
-            }
-        }
-        
         self.endedAt = Date()
         status = MatchStatus.Finished
     }
