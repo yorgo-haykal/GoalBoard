@@ -24,6 +24,9 @@ struct ContentView: View {
                         .navigationDestination(for: Team.self) { team in
                             TeamDetailView(team: team)
                         }
+                        .navigationDestination(for: Match.self) { match in
+                            MatchDetailView(match: match)
+                        }
                 }
             }
             
@@ -35,6 +38,9 @@ struct ContentView: View {
                         }
                         .navigationDestination(for: Player.self) { player in
                             PlayerDetailView(player: player)
+                        }
+                        .navigationDestination(for: Match.self) { match in
+                            MatchDetailView(match: match)
                         }
                 }
             }

@@ -11,98 +11,131 @@ import SwiftData
 struct TeamDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var players: [Player]
-    
-    @State private var showAddPlayerSheet: Bool = false
+
+    @State private var showAddPlayer: Bool = false
     @State private var playerToAdd: Player?
-    
+
     @State private var isEditing: Bool = false
     @State private var newTeamName: String = ""
-    
+
     @Bindable var team: Team
-    
+
     var body: some View {
-        VStack (alignment: .leading) {
+        List {
             if isEditing {
+                Section("Name") {
+                    TextField("Name", text: $newTeamName)
+                }
+            }
+
+            Section("Record") {
                 HStack {
-                    TextField("New Name", text: $newTeamName)
-                        .textFieldStyle(.roundedBorder)
-                    Button("Confirm") {
-                        team.name = newTeamName
-                        try? modelContext.save()
-                        isEditing.toggle()
+                    Label("Matches played", systemImage: "soccerball")
+                    Spacer()
+                    Text("\(team.matches.count)")
+                        .foregroundStyle(.secondary)
+                }
+                HStack {
+                    Label("W–D–L", systemImage: "trophy")
+                    Spacer()
+                    Text("\(team.wins)–\(team.draws)–\(team.losses)")
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Section("Players") {
+                if showAddPlayer {
+                    HStack {
+                        Picker("Add player", selection: $playerToAdd) {
+                            Text("Select a player").tag(Optional<Player>(nil))
+                            ForEach(players) { player in
+                                Text(player.name).tag(Optional(player))
+                            }
+                        }
+                        Button("Add") {
+                            if let player = playerToAdd {
+                                team.addPlayer(player)
+                                player.teams.append(team)
+                                playerToAdd = nil
+                                showAddPlayer = false
+                                try? modelContext.save()
+                            }
+                        }
+                        .disabled(playerToAdd == nil)
                     }
                 }
-                Divider()
-            }
-            if showAddPlayerSheet {
-                HStack {
-                    Picker("Select player", selection: $playerToAdd) {
-                        Text("Select a player").tag(Optional<Player>(nil))
-                        ForEach(players) { player in
-                            Text(player.name).tag(Optional(player))
+
+                if team.players.isEmpty {
+                    Text("No players yet")
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(team.players) { player in
+                        NavigationLink(value: player) {
+                            Text(player.name)
                         }
                     }
-                    .pickerStyle(.menu)
-                    
-                    Button("Add") {
-                        if let player = playerToAdd{
-                            team.addPlayer(player)
-                            player.teams.append(team)
-                            playerToAdd = nil
-                            showAddPlayerSheet.toggle()
+                    .onDelete { indexes in
+                        for index in indexes {
+                            team.removePlayer(team.players[index])
                             try? modelContext.save()
                         }
                     }
-                    .disabled(playerToAdd == nil)
                 }
             }
-                
-            Text("Players:")
-            List {
-                ForEach(team.players) { player in
-                    NavigationLink(player.name) {
-                        PlayerDetailView(player: player)
-                    }
-                }
-                .onDelete { indexes in
-                    for index in indexes {
-                        team.removePlayer(team.players[index])
-                        try? modelContext.save()
+
+            Section("Match History") {
+                if team.matches.isEmpty {
+                    Text("No matches played")
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(team.matches) { match in
+                        NavigationLink(value: match) {
+                            HStack {
+                                Text(match.team1?.name ?? "Team 1")
+                                Spacer()
+                                Text("\(match.team1Score) - \(match.team2Score)")
+                                    .foregroundStyle(.secondary)
+                                Spacer()
+                                Text(match.team2?.name ?? "Team 2")
+                            }
+                        }
                     }
                 }
             }
-            
-            Text("Matches played: \(team.matches.count)")
-            
-            Text("Record: \(team.wins)-\(team.draws)-\(team.losses)")
-                .navigationTitle(team.name)
-            Divider()
-            Text("Match History:")
-            List {
-                ForEach(team.matches) { match in
-                    Text("\(match.team1?.name ?? "Team 2")   \(match.team1Score) - \(match.team2Score) \(match.team2?.name ?? "Team 2")")
-                }
-            }.listStyle(.inset)
-            Spacer()
         }
-        .toolbar(content: {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Add Player") {
-                    showAddPlayerSheet.toggle()
-                }
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(isEditing ? "Cancel" : "Edit") {
-                    if isEditing {
+        .navigationTitle(team.name)
+        .toolbar {
+            if isEditing {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") {
                         newTeamName = ""
-                    } else {
-                        newTeamName = team.name
+                        isEditing = false
                     }
-                    isEditing.toggle()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
+                        team.name = newTeamName
+                        try? modelContext.save()
+                        isEditing = false
+                    }
+                    .disabled(newTeamName.trimmingCharacters(in: .whitespaces).isEmpty)
+                }
+            } else {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showAddPlayer.toggle()
+                    } label: {
+                        Image(systemName: "person.badge.plus")
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Edit") {
+                        newTeamName = team.name
+                        isEditing = true
+                    }
                 }
             }
-        })
-        .padding()
+        }
     }
 }
 

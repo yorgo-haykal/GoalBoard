@@ -11,53 +11,66 @@ import SwiftData
 struct PlayerDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var player: Player
-    
+
     @State private var isEditing = false
     @State private var newPlayerName: String = ""
-    
+
     var body: some View {
-        VStack (alignment: .leading){
+        List {
             if isEditing {
+                Section("Name") {
+                    TextField("Name", text: $newPlayerName)
+                }
+            }
+
+            Section {
                 HStack {
-                    TextField("New Name", text: $newPlayerName)
-                        .textFieldStyle(.roundedBorder)
-                    Button("Confirm") {
+                    Label("Goals", systemImage: "soccerball")
+                    Spacer()
+                    Text("\(player.goalCount)")
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Section("Teams") {
+                if player.teams.isEmpty {
+                    Text("Not on any team")
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(player.teams) { team in
+                        NavigationLink(value: team) {
+                            Text(team.name)
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle(player.name)
+        .toolbar {
+            if isEditing {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") {
+                        newPlayerName = ""
+                        isEditing = false
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
                         player.name = newPlayerName
                         try? modelContext.save()
-                        isEditing.toggle()
+                        isEditing = false
                     }
+                    .disabled(newPlayerName.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
-                Divider()
-            }
-            
-            Text("Goals: \(player.goalCount)")
-            Divider()
-            Text("Teams: ")
-            List{
-                ForEach(player.teams){ team in
-                    NavigationLink(value: team) {
-                        Text(team.name)
-                    }
-                }
-            }
-            Divider()
-            Text("Match History:")
-            Spacer()
-        }
-        .padding()
-        .toolbar(content: {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(isEditing ? "Cancel" : "Edit") {
-                    if isEditing{
-                        newPlayerName = ""
-                    } else {
+            } else {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Edit") {
                         newPlayerName = player.name
+                        isEditing = true
                     }
-                    isEditing.toggle()
                 }
             }
-        })
-        .navigationTitle(player.name)
+        }
     }
 }
 
