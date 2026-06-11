@@ -12,13 +12,21 @@ struct TeamDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var players: [Player]
 
-    @State private var showAddPlayer: Bool = false
-    @State private var playerToAdd: Player?
-
     @State private var isEditing: Bool = false
     @State private var newTeamName: String = ""
 
     @Bindable var team: Team
+
+    // Players in the database who aren't already on this team
+    private var addablePlayers: [Player] {
+        players.filter { p in !team.players.contains { $0.id == p.id } }
+    }
+
+    private func add(_ player: Player) {
+        team.addPlayer(player)
+        player.teams.append(team)
+        try? modelContext.save()
+    }
 
     var body: some View {
         List {
@@ -44,24 +52,13 @@ struct TeamDetailView: View {
             }
 
             Section("Players") {
-                if showAddPlayer {
-                    HStack {
-                        Picker("Add player", selection: $playerToAdd) {
-                            Text("Select a player").tag(Optional<Player>(nil))
-                            ForEach(players) { player in
-                                Text(player.name).tag(Optional(player))
-                            }
+                if !addablePlayers.isEmpty {
+                    Menu {
+                        ForEach(addablePlayers) { player in
+                            Button(player.name) { add(player) }
                         }
-                        Button("Add") {
-                            if let player = playerToAdd {
-                                team.addPlayer(player)
-                                player.teams.append(team)
-                                playerToAdd = nil
-                                showAddPlayer = false
-                                try? modelContext.save()
-                            }
-                        }
-                        .disabled(playerToAdd == nil)
+                    } label: {
+                        Label("Add player", systemImage: "person.badge.plus")
                     }
                 }
 
@@ -121,13 +118,6 @@ struct TeamDetailView: View {
                     .disabled(newTeamName.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
             } else {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showAddPlayer.toggle()
-                    } label: {
-                        Image(systemName: "person.badge.plus")
-                    }
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Edit") {
                         newTeamName = team.name
