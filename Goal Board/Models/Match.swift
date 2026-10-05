@@ -25,7 +25,7 @@ class Match: Identifiable, Hashable {
         goals.filter { $0.team == team2 }.count
     }
     
-    @Relationship(deleteRule: .cascade)
+    @Relationship(deleteRule: .cascade, inverse: \Goal.match)
     var goals: [Goal] = []
     
     var result: MatchResult {
@@ -78,6 +78,7 @@ class Match: Identifiable, Hashable {
         guard status == .InProgress else {
             throw MatchError.matchNotInProgress
         }
+        goal.match = self
         goals.append(goal)
     }
     
@@ -127,7 +128,7 @@ class Goal: Identifiable {
     var id: UUID = UUID()
     
     @Relationship
-    var match: Match
+    var match: Match?
     @Relationship
     var team: Team?
     @Relationship
@@ -138,7 +139,7 @@ class Goal: Identifiable {
     @Attribute
     var goalType: GoalType
     
-    init(match: Match, team: Team? = nil , player: Player? = nil, elapsedSeconds: Int, goalType: GoalType){
+    init(match: Match?, team: Team? = nil , player: Player? = nil, elapsedSeconds: Int, goalType: GoalType){
         self.match = match
         self.team = team
         self.player = player
