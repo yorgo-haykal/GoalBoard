@@ -6,19 +6,76 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		96D5B7812FDAE75D0017A5CA /* WatchGoalBoard Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 96D5B7772FDAE75B0017A5CA /* WatchGoalBoard Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		96D5B77F2FDAE75D0017A5CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96E354A62E3C232E006B9EA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96D5B7762FDAE75B0017A5CA;
+			remoteInfo = "WatchGoalBoard Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		96D5B7822FDAE75D0017A5CA /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				96D5B7812FDAE75D0017A5CA /* WatchGoalBoard Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		96D5B7772FDAE75B0017A5CA /* WatchGoalBoard Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchGoalBoard Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E354AE2E3C232E006B9EA7 /* Goal Board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Goal Board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		96D5B78D2FDAE8AD0017A5CA /* Exceptions for "Goal Board" folder in "WatchGoalBoard Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Goal_BoardApp.swift,
+				Models/Match.swift,
+				Models/Player.swift,
+				Models/Team.swift,
+			);
+			target = 96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		96D5B7782FDAE75B0017A5CA /* WatchGoalBoard Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "WatchGoalBoard Watch App";
+			sourceTree = "<group>";
+		};
 		96E354B02E3C232E006B9EA7 /* Goal Board */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				96D5B78D2FDAE8AD0017A5CA /* Exceptions for "Goal Board" folder in "WatchGoalBoard Watch App" target */,
+			);
 			path = "Goal Board";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		96D5B7742FDAE75B0017A5CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96E354AB2E3C232E006B9EA7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				96E354B02E3C232E006B9EA7 /* Goal Board */,
+				96D5B7782FDAE75B0017A5CA /* WatchGoalBoard Watch App */,
 				96E354AF2E3C232E006B9EA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				96E354AE2E3C232E006B9EA7 /* Goal Board.app */,
+				96D5B7772FDAE75B0017A5CA /* WatchGoalBoard Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +107,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96D5B7852FDAE75D0017A5CA /* Build configuration list for PBXNativeTarget "WatchGoalBoard Watch App" */;
+			buildPhases = (
+				96D5B7732FDAE75B0017A5CA /* Sources */,
+				96D5B7742FDAE75B0017A5CA /* Frameworks */,
+				96D5B7752FDAE75B0017A5CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				96D5B7782FDAE75B0017A5CA /* WatchGoalBoard Watch App */,
+			);
+			name = "WatchGoalBoard Watch App";
+			packageProductDependencies = (
+			);
+			productName = "WatchGoalBoard Watch App";
+			productReference = 96D5B7772FDAE75B0017A5CA /* WatchGoalBoard Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		96E354AD2E3C232E006B9EA7 /* Goal Board */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96E354B92E3C2330006B9EA7 /* Build configuration list for PBXNativeTarget "Goal Board" */;
@@ -55,10 +136,12 @@
 				96E354AA2E3C232E006B9EA7 /* Sources */,
 				96E354AB2E3C232E006B9EA7 /* Frameworks */,
 				96E354AC2E3C232E006B9EA7 /* Resources */,
+				96D5B7822FDAE75D0017A5CA /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				96D5B7802FDAE75D0017A5CA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				96E354B02E3C232E006B9EA7 /* Goal Board */,
@@ -77,9 +160,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
+				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					96D5B7762FDAE75B0017A5CA = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					96E354AD2E3C232E006B9EA7 = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -100,11 +186,19 @@
 			projectRoot = "";
 			targets = (
 				96E354AD2E3C232E006B9EA7 /* Goal Board */,
+				96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		96D5B7752FDAE75B0017A5CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96E354AC2E3C232E006B9EA7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +209,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		96D5B7732FDAE75B0017A5CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96E354AA2E3C232E006B9EA7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +225,83 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		96D5B7802FDAE75D0017A5CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */;
+			targetProxy = 96D5B77F2FDAE75D0017A5CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		96D5B7832FDAE75D0017A5CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BY73KUV888;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchGoalBoard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "yorgohaykal.Goal-Board";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yorgohaykal.Goal-Board.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		96D5B7842FDAE75D0017A5CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BY73KUV888;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchGoalBoard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "yorgohaykal.Goal-Board";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "yorgohaykal.Goal-Board.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
 		96E354B72E3C2330006B9EA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -305,6 +482,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		96D5B7852FDAE75D0017A5CA /* Build configuration list for PBXNativeTarget "WatchGoalBoard Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96D5B7832FDAE75D0017A5CA /* Debug */,
+				96D5B7842FDAE75D0017A5CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		96E354A92E3C232E006B9EA7 /* Build configuration list for PBXProject "Goal Board" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
