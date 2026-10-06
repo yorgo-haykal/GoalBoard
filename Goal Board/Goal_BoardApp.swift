@@ -10,10 +10,23 @@ import SwiftData
 
 @main
 struct Goal_BoardApp: App {
+    let container: ModelContainer
+    let connectivity: PhoneConnectivity
+
+    init() {
+        do {
+            container = try ModelContainer(for: Player.self, Team.self, Match.self)
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+        connectivity = PhoneConnectivity(container: container)
+        connectivity.activate()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Player.self, Team.self, Match.self])
+        .modelContainer(container)
     }
 }

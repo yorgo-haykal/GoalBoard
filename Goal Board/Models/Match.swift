@@ -58,6 +58,20 @@ class Match: Identifiable, Hashable {
         self.startedAt = Date()
     }
     
+    // To be used when a quick match is started on the Watch, which chooses the IDs
+    init(id: UUID, team1ID: UUID, team2ID: UUID, startedAt: Date) {
+        let team1 = Team(name: "Team 1", isTemporary: true)
+        team1.id = team1ID
+        let team2 = Team(name: "Team 2", isTemporary: true)
+        team2.id = team2ID
+        self.id = id
+        self.date = startedAt
+        self.team1 = team1
+        self.team2 = team2
+        self.status = .InProgress
+        self.startedAt = startedAt
+    }
+
     // To be used when scheduling a match
     init(date: Date = Date(), team1: Team, team2: Team){
         self.date = date
@@ -89,19 +103,19 @@ class Match: Identifiable, Hashable {
         goals.removeAll(where: { $0.id == goal.id })
     }
     
-    func startMatch() throws {
+    func startMatch(at date: Date = Date()) throws {
         guard status == .Scheduled || status == .InProgress else {
             throw MatchError.matchFinished
         }
-        self.startedAt = Date()
+        self.startedAt = date
         status = MatchStatus.InProgress
     }
-    
-    func endMatch() throws {
+
+    func endMatch(at date: Date = Date()) throws {
         guard status == .InProgress else {
             throw MatchError.matchNotInProgress
         }
-        self.endedAt = Date()
+        self.endedAt = date
         status = MatchStatus.Finished
     }
     
