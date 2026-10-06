@@ -39,20 +39,12 @@
 		96E354AE2E3C232E006B9EA7 /* Goal Board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Goal Board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		96D5B78D2FDAE8AD0017A5CA /* Exceptions for "Goal Board" folder in "WatchGoalBoard Watch App" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Goal_BoardApp.swift,
-				Models/Match.swift,
-				Models/Player.swift,
-				Models/Team.swift,
-			);
-			target = 96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		96A3F1012FE5C0A00017A5CA /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		96D5B7782FDAE75B0017A5CA /* WatchGoalBoard Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "WatchGoalBoard Watch App";
@@ -60,9 +52,6 @@
 		};
 		96E354B02E3C232E006B9EA7 /* Goal Board */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				96D5B78D2FDAE8AD0017A5CA /* Exceptions for "Goal Board" folder in "WatchGoalBoard Watch App" target */,
-			);
 			path = "Goal Board";
 			sourceTree = "<group>";
 		};
@@ -91,6 +80,7 @@
 			children = (
 				96E354B02E3C232E006B9EA7 /* Goal Board */,
 				96D5B7782FDAE75B0017A5CA /* WatchGoalBoard Watch App */,
+				96A3F1012FE5C0A00017A5CA /* Shared */,
 				96E354AF2E3C232E006B9EA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -120,6 +110,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				96A3F1012FE5C0A00017A5CA /* Shared */,
 				96D5B7782FDAE75B0017A5CA /* WatchGoalBoard Watch App */,
 			);
 			name = "WatchGoalBoard Watch App";
@@ -144,6 +135,7 @@
 				96D5B7802FDAE75D0017A5CA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				96A3F1012FE5C0A00017A5CA /* Shared */,
 				96E354B02E3C232E006B9EA7 /* Goal Board */,
 			);
 			name = "Goal Board";
