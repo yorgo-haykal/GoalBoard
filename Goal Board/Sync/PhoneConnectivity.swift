@@ -6,18 +6,20 @@
 //
 
 import Foundation
+import OSLog
 import SwiftData
 import WatchConnectivity
 
 // iPhone side of the Watch connection:
 // - sends the latest RosterSnapshot whenever the store is saved
-// - applies MatchEvents queued by the Watch
+// - applies MatchEvents from the Watch, sent as messages or queued user info
 @MainActor
 final class PhoneConnectivity: NSObject {
     private let container: ModelContainer
     private let session: WCSession? = WCSession.isSupported() ? .default : nil
     private var lastSentRoster: RosterSnapshot?
     private var saveObserver: NSObjectProtocol?
+    private let logger = Logger(subsystem: "yorgohaykal.Goal-Board", category: "Connectivity")
 
     init(container: ModelContainer) {
         self.container = container
@@ -45,7 +47,7 @@ final class PhoneConnectivity: NSObject {
             try session.updateApplicationContext(roster.payload())
             lastSentRoster = roster
         } catch {
-            print("Failed to send roster to the Watch: \(error)")
+            logger.error("Failed to send roster to the Watch: \(error)")
         }
     }
 
@@ -57,7 +59,7 @@ final class PhoneConnectivity: NSObject {
                 try context.save()
             }
         } catch {
-            print("Failed to apply event from the Watch: \(error)")
+            logger.error("Failed to apply event from the Watch: \(error)")
         }
     }
 }
@@ -66,11 +68,13 @@ final class PhoneConnectivity: NSObject {
 // order they were received, which matters (a goal must be applied before its removal).
 extension PhoneConnectivity: WCSessionDelegate {
     nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if let error {
-            print("WCSession activation failed: \(error)")
-        }
         DispatchQueue.main.async {
-            MainActor.assumeIsolated { self.sendRoster() }
+            MainActor.assumeIsolated {
+                if let error {
+                    self.logger.error("WCSession activation failed: \(error)")
+                }
+                self.sendRoster()
+            }
         }
     }
 
@@ -86,6 +90,13 @@ extension PhoneConnectivity: WCSessionDelegate {
     nonisolated func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
         DispatchQueue.main.async {
             MainActor.assumeIsolated { self.receive(userInfo) }
+        }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+        DispatchQueue.main.async {
+            MainActor.assumeIsolated { self.receive(message) }
+            replyHandler([:])
         }
     }
 
