@@ -11,6 +11,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		969D859C307509C6004B48F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96E354A62E3C232E006B9EA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96E354AD2E3C232E006B9EA7;
+			remoteInfo = "Goal Board";
+		};
 		96D5B77F2FDAE75D0017A5CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96E354A62E3C232E006B9EA7 /* Project object */;
@@ -35,11 +42,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		969D8598307509C6004B48F4 /* GoalBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoalBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D5B7772FDAE75B0017A5CA /* WatchGoalBoard Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchGoalBoard Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E354AE2E3C232E006B9EA7 /* Goal Board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Goal Board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		969D8599307509C6004B48F4 /* GoalBoardTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GoalBoardTests;
+			sourceTree = "<group>";
+		};
 		96A3F1012FE5C0A00017A5CA /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Shared;
@@ -58,6 +71,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		969D8595307509C6004B48F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96D5B7742FDAE75B0017A5CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,6 +101,7 @@
 				96E354B02E3C232E006B9EA7 /* Goal Board */,
 				96D5B7782FDAE75B0017A5CA /* WatchGoalBoard Watch App */,
 				96A3F1012FE5C0A00017A5CA /* Shared */,
+				969D8599307509C6004B48F4 /* GoalBoardTests */,
 				96E354AF2E3C232E006B9EA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +111,7 @@
 			children = (
 				96E354AE2E3C232E006B9EA7 /* Goal Board.app */,
 				96D5B7772FDAE75B0017A5CA /* WatchGoalBoard Watch App.app */,
+				969D8598307509C6004B48F4 /* GoalBoardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,6 +119,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		969D8597307509C6004B48F4 /* GoalBoardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 969D85A0307509C6004B48F4 /* Build configuration list for PBXNativeTarget "GoalBoardTests" */;
+			buildPhases = (
+				969D8594307509C6004B48F4 /* Sources */,
+				969D8595307509C6004B48F4 /* Frameworks */,
+				969D8596307509C6004B48F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				969D859D307509C6004B48F4 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				969D8599307509C6004B48F4 /* GoalBoardTests */,
+			);
+			name = GoalBoardTests;
+			packageProductDependencies = (
+			);
+			productName = GoalBoardTests;
+			productReference = 969D8598307509C6004B48F4 /* GoalBoardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96D5B7852FDAE75D0017A5CA /* Build configuration list for PBXNativeTarget "WatchGoalBoard Watch App" */;
@@ -152,9 +197,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2660;
+				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
+					969D8597307509C6004B48F4 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 96E354AD2E3C232E006B9EA7;
+					};
 					96D5B7762FDAE75B0017A5CA = {
 						CreatedOnToolsVersion = 26.5;
 					};
@@ -179,11 +228,19 @@
 			targets = (
 				96E354AD2E3C232E006B9EA7 /* Goal Board */,
 				96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */,
+				969D8597307509C6004B48F4 /* GoalBoardTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		969D8596307509C6004B48F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96D5B7752FDAE75B0017A5CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,6 +258,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		969D8594307509C6004B48F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96D5B7732FDAE75B0017A5CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,6 +282,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		969D859D307509C6004B48F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96E354AD2E3C232E006B9EA7 /* Goal Board */;
+			targetProxy = 969D859C307509C6004B48F4 /* PBXContainerItemProxy */;
+		};
 		96D5B7802FDAE75D0017A5CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 96D5B7762FDAE75B0017A5CA /* WatchGoalBoard Watch App */;
@@ -226,6 +295,58 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		969D859E307509C6004B48F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BY73KUV888;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yorgohaykal.GoalBoardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Goal Board.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Goal Board";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		969D859F307509C6004B48F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BY73KUV888;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yorgohaykal.GoalBoardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Goal Board.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Goal Board";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
 		96D5B7832FDAE75D0017A5CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -476,6 +597,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		969D85A0307509C6004B48F4 /* Build configuration list for PBXNativeTarget "GoalBoardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				969D859E307509C6004B48F4 /* Debug */,
+				969D859F307509C6004B48F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		96D5B7852FDAE75D0017A5CA /* Build configuration list for PBXNativeTarget "WatchGoalBoard Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
